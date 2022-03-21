@@ -18,33 +18,33 @@
       become: true
 
   tasks:
-  - name: Ensure dnf packages are installed
-    become: true
-    dnf:
-      name: 
-        - gnome-tweaks
-        - gnome-extensions-app
-        - gnome-shell-extension-dash-to-dock
-        - gnome-shell-extension-system-monitor-applet
-        - git
-        - java-11-openjdk-headless
-        - golang
-        - python3
-        - python3-pip
+    - name: Ensure dnf packages are installed
+      become: true
+      dnf:
+        name:
+          - gnome-tweaks
+          - gnome-extensions-app
+          - gnome-shell-extension-dash-to-dock
+          - gnome-shell-extension-system-monitor-applet
+          - git
+          - java-11-openjdk-headless
+          - golang
+          - python3
+          - python3-pip
 
-  - name: Ensure flatpak packages are installed
-    community.general.flatpak:
-      name:
-        - com.sublimetext.three
-        - com.spotify.Client
+    - name: Ensure flatpak packages are installed
+      community.general.flatpak:
+        name:
+          - com.sublimetext.three
+          - com.spotify.Client
 
-  - name: Ensure ansible is installed
-    pip:
-      name: ansible
+    - name: Ensure ansible is installed
+      pip:
+        name: ansible
 
-  - name: Configure git
-    community.general.git_config:
-      name: "{{ item.name }}"
-      scope: "{{ item.scope }}"
-      value: "{{ item.value }}"
-    loop: "{{ git_configs }}"
+    - name: Configure git
+      community.general.git_config:
+        name: "{{ item.name }}"
+        scope: "{{ item.scope }}"
+        value: "{{ item.value }}"
+      loop: "{{ git_configs }}"
