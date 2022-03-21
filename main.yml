@@ -7,7 +7,7 @@
 
   pre_tasks:
     - name: Include configuration.
-      include_vars: "{{ item }}"
+      ansible.builtin.include_vars: "{{ item }}"
       with_first_found:
         - files:
             - "{{ playbook_dir }}/config.yml"
@@ -20,7 +20,7 @@
   tasks:
     - name: Ensure dnf packages are installed
       become: true
-      dnf:
+      ansible.builtin.dnf:
         name:
           - gnome-tweaks
           - gnome-extensions-app
@@ -39,7 +39,7 @@
           - com.spotify.Client
 
     - name: Ensure ansible is installed
-      pip:
+      ansible.builtin.pip:
         name: ansible
 
     - name: Configure git
