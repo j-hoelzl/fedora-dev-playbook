@@ -48,3 +48,17 @@
         scope: "{{ item.scope }}"
         value: "{{ item.value }}"
       loop: "{{ git_configs }}"
+
+    - name: Ensure ~/.bashrc.d exists
+      ansible.builtin.file:
+        path: ~/.bashrc.d
+        state: directory
+        mode: 0750
+
+    - name: Add git info to bash prompt
+      ansible.builtin.copy:
+        content: |
+          . /usr/share/git-core/contrib/completion/git-prompt.sh
+          export PS1='[\u@\h \W$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")]\$ '
+        dest: ~/.bashrc.d/add-git-info-to-prompt.sh
+        mode: 0640
