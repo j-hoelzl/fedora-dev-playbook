@@ -1,2 +1,5 @@
 ---
+dnf_installed_packages: []
+flatpak_installed_packages: []
+pip_installed_packages: []
 git_configs: []
