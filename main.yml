@@ -18,6 +18,13 @@
       become: true
 
   tasks:
+    - name: Add docker repository
+      become: true
+      ansible.builtin.get_url:
+        url: https://download.docker.com/linux/fedora/docker-ce.repo
+        dest: /etc/yum.repos.d/
+        mode: 0644
+
     - name: Ensure dnf packages are installed
       become: true
       ansible.builtin.dnf:
@@ -30,6 +37,13 @@
     - name: Ensure pip packages are installed
       ansible.builtin.pip:
         name: "{{ pip_installed_packages }}"
+
+    - name: Ensure docker service is started and enabled
+      become: true
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: true
 
     - name: Configure git
       community.general.git_config:
